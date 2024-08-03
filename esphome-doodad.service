@@ -1,0 +1,15 @@
+[Unit]
+Description=ESPHome Doodad server
+After=network.target
+
+[Service]
+WorkingDirectory=/home/tarocco/code/esphome-doodad/
+ExecStart=/bin/bash ./start.sh
+Type=simple
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+[Install]
+WantedBy=default.target
+RequiredBy=network.target

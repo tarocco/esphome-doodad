@@ -1,0 +1,1 @@
+aioesphomeserver @ git+https://github.com/tarocco/aioesphomeserver.git
