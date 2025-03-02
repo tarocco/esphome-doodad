@@ -132,10 +132,8 @@ class FanEntity(BasicEntity):
 
     async def set_state(self, val):
         await self.device.log(3, self.DOMAIN, f"[{self.object_id}] Setting state to {val}")
-        changed = self._state != val
         self._state = val
-        if changed:
-            await self.notify_state_change()
+        await self.notify_state_change()
 
     async def state_json(self):
         state = await self.get_state()
