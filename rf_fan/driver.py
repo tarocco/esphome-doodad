@@ -1,5 +1,5 @@
+import asyncio
 from aioesphomeserver import EntityListener
-from subprocess import run
 from .ook import DEFAULT_SENDOOK_BIN_PATH
 
 
@@ -21,4 +21,7 @@ class Driver(EntityListener):
         if key == "state_change":
             level = message.speed_level if message.state else 0
             speed_level_code = self.speed_level_codes[level]
-            run([self.sendook_bin] + self.sendook_args + [speed_level_code])
+            await asyncio.create_subprocess_exec(
+                self.sendook_bin,
+                *self.sendook_args,
+                speed_level_code)
