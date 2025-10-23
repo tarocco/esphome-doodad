@@ -25,3 +25,11 @@ class Driver(EntityListener):
                 self.sendook_bin,
                 *self.sendook_args,
                 speed_level_code)
+
+    async def can_handle(self, key, message):
+        if key == 'log':
+            return False
+        if not hasattr(message, "key"):
+            return False
+        entity = self.device.get_entity(self.entity_id)
+        return entity != None and message.key == entity.key
